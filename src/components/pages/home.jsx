@@ -95,7 +95,7 @@ export default class Home extends Component {
 					<span>
 						Your shortened URL is:{' '}
 						<a href={this.state.urlOriginal} target='_blank' rel='noreferrer'>
-							https://url-shortener-frontend-6tel.onrender.com/{this.state.urlAcortada}
+							https://url-shortener-frontend-6tel.onrender.com/url/{this.state.urlAcortada}
 						</a>
 					</span>
 				) : null}
