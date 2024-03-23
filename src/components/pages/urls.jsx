@@ -28,7 +28,7 @@ export default class Urls extends Component {
 				<li key={Object.values(item)} className='links-wrapper'>
 					{Object.keys(item)}
 					<a href={Object.keys(item)} target='_blank' rel='noreferrer'>
-						http://localhost:8080/url/{Object.values(item)}
+					https://url-shortener-frontend-6tel.onrender.com/url/{Object.values(item)}
 					</a>
 				</li>
 			)
