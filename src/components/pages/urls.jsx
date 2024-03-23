@@ -15,8 +15,7 @@ export default class Urls extends Component {
 		this.setState({ isLoading: true })
 
 		fetch('https://url-shortener-backend-5rxc.onrender.com/urls', {
-			method: 'GET',
-			credentials: 'include'
+			method: 'GET'
 		})
 			.then(res => res.json())
 			.then(response => this.setState({ urls: response, isLoading: false }))

@@ -40,7 +40,6 @@ export default class Home extends Component {
 
 		fetch('https://url-shortener-backend-5rxc.onrender.com/url', {
 			method: 'POST',
-			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json'
 			},
