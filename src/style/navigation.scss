@@ -1,0 +1,31 @@
+.barra-links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #2eb5be;
+    height: 75px;
+    a {
+        font-family: "Righteous", sans-serif;
+        font-weight: 400;
+        font-size: 1.5rem;
+        color: aliceblue;
+        &:hover {
+            color: #f5cb7e;
+            text-decoration: none;
+        }
+    }
+    .all-links {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .barra-links {
+        a {
+            font-size: 1.3rem;
+        }
+        .all-links {
+            font-size: .9rem;
+        }
+    }
+}
