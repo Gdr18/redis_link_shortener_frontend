@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { MutatingDots } from 'react-loader-spinner'
 import CrossIcon from '../icono/cross-icon'
 
+const URL = import.meta.env.VITE_BACKEND_URL || 'https://localhost:5000'
+
 export default class Home extends Component {
 	constructor() {
 		super()
@@ -38,7 +40,7 @@ export default class Home extends Component {
 			isLoading: true
 		})
 
-		fetch('https://url-shortener-backend-5rxc.onrender.com/url', {
+		fetch(`${URL}/url`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

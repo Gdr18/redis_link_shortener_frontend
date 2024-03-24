@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { MutatingDots } from 'react-loader-spinner'
 
+const URL = import.meta.env.VITE_BACKEND_URL || 'https://localhost:5000'
+
 export default class Urls extends Component {
 	constructor() {
 		super()
@@ -14,7 +16,7 @@ export default class Urls extends Component {
 	componentDidMount() {
 		this.setState({ isLoading: true })
 
-		fetch('https://url-shortener-backend-5rxc.onrender.com/urls', {
+		fetch(`${URL}/urls`, {
 			method: 'GET'
 		})
 			.then(res => res.json())
