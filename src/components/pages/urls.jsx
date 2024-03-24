@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { MutatingDots } from 'react-loader-spinner'
 
-const URL = import.meta.env.VITE_BACKEND_URL || 'https://localhost:5000'
+const URL = import.meta.env.VITE_BACKEND_URL
+//const URL = import.meta.env.VITE_BACKEND_URL_DEV
 
 export default class Urls extends Component {
 	constructor() {
@@ -27,9 +28,9 @@ export default class Urls extends Component {
 	urlsItems() {
 		return this.state.urls.map(item => {
 			return (
-				<li key={Object.values(item)} className='links-wrapper'>
+				<li key={Object.values(item)} className='links-wrapper' title={Object.keys(item)}>
 					{Object.keys(item)}
-					<a href={Object.keys(item)} target='_blank' rel='noreferrer'>
+					<a href={Object.keys(item)} title={`https://url-shortener-frontend-6tel.onrender.com/url/${Object.values(item)}`}target='_blank' rel='noreferrer'>
 					https://url-shortener-frontend-6tel.onrender.com/url/{Object.values(item)}
 					</a>
 				</li>

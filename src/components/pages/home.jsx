@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import { MutatingDots } from 'react-loader-spinner'
 import CrossIcon from '../icono/cross-icon'
 
-const URL = import.meta.env.VITE_BACKEND_URL || 'https://localhost:5000'
+const URL = import.meta.env.VITE_BACKEND_URL
+//const URL = import.meta.env.VITE_BACKEND_URL_DEV
 
 export default class Home extends Component {
 	constructor() {
@@ -96,7 +97,7 @@ export default class Home extends Component {
 				{this.state.submit ? (
 					<span>
 						Your shortened URL is:{' '}
-						<a href={this.state.urlOriginal} target='_blank' rel='noreferrer'>
+						<a href={this.state.urlOriginal} title={`https://url-shortener-frontend-6tel.onrender.com/url/${this.state.urlAcortada}`} target='_blank' rel='noreferrer'>
 							https://url-shortener-frontend-6tel.onrender.com/url/{this.state.urlAcortada}
 						</a>
 					</span>
