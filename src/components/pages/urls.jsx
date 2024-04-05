@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { MutatingDots } from 'react-loader-spinner'
 
-const URL = import.meta.env.VITE_BACKEND_URL
-//const URL = import.meta.env.VITE_BACKEND_URL_DEV
-
 export default class Urls extends Component {
 	constructor() {
 		super()
@@ -17,7 +14,7 @@ export default class Urls extends Component {
 	componentDidMount() {
 		this.setState({ isLoading: true })
 
-		fetch(`${URL}/urls`, {
+		fetch(`${import.meta.env.VITE_BACKEND_URL}/urls`, {
 			method: 'GET'
 		})
 			.then(res => res.json())
@@ -28,10 +25,10 @@ export default class Urls extends Component {
 	urlsItems() {
 		return this.state.urls.map(item => {
 			return (
-				<li key={Object.values(item)} className='links-wrapper' title={Object.keys(item)}>
-					{Object.keys(item)}
-					<a href={Object.keys(item)} title={`https://url-shortener-frontend-6tel.onrender.com/url/${Object.values(item)}`}target='_blank' rel='noreferrer'>
-					https://url-shortener-frontend-6tel.onrender.com/url/{Object.values(item)}
+				<li key={Object.keys(item)} className='links-wrapper' title={Object.values(item)}>
+					{Object.values(item)}
+					<a href={Object.values(item)} title={`https://url-shortener-frontend-6tel.onrender.com/${Object.keys(item)}`}target='_blank' rel='noreferrer'>
+					https://url-shortener-frontend-6tel.onrender.com/{Object.keys(item)}
 					</a>
 				</li>
 			)

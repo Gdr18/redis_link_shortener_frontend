@@ -3,9 +3,6 @@ import React, { Component } from 'react'
 import { MutatingDots } from 'react-loader-spinner'
 import CrossIcon from '../icono/cross-icon'
 
-const URL = import.meta.env.VITE_BACKEND_URL
-//const URL = import.meta.env.VITE_BACKEND_URL_DEV
-
 export default class Home extends Component {
 	constructor() {
 		super()
@@ -37,11 +34,10 @@ export default class Home extends Component {
 		event.preventDefault()
 
 		this.setState({
-			submit: false,
 			isLoading: true
 		})
 
-		fetch(`${URL}/url`, {
+		fetch(`${import.meta.env.VITE_BACKEND_URL}/url`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -51,15 +47,17 @@ export default class Home extends Component {
 			.then(res => res.json())
 			.then(response =>
 				this.setState({
-					urlAcortada: response.urlAcortada
+					urlAcortada: response
 				})
 			)
-			.catch(err => console.error(err))
+			.catch(err =>
+				console.log(err)
+			)
 			.finally(() =>
 				this.setState({
-					isLoading: false,
-					submit: true
-				})
+			 		isLoading: false,
+			 		submit: true
+			 	})
 			)
 	}
 
@@ -83,6 +81,7 @@ export default class Home extends Component {
 					</span>
 				</div>
 				<button>SHORTEN URL</button>
+
 				{this.state.isLoading ? (
 					<MutatingDots
 						height='100'
@@ -94,11 +93,12 @@ export default class Home extends Component {
 						wrapperStyle={{ marginTop: '50px' }}
 					/>
 				) : null}
+				
 				{this.state.submit ? (
 					<span>
 						Your shortened URL is:{' '}
 						<a href={this.state.urlOriginal} title={`https://url-shortener-frontend-6tel.onrender.com/url/${this.state.urlAcortada}`} target='_blank' rel='noreferrer'>
-							https://url-shortener-frontend-6tel.onrender.com/url/{this.state.urlAcortada}
+							https://url-shortener-frontend-6tel.onrender.com/{this.state.urlAcortada}
 						</a>
 					</span>
 				) : null}
