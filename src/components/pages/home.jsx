@@ -55,9 +55,7 @@ export default class Home extends Component {
 					urlAcortada: response
 				})
 			})
-			.catch(err =>
-				console.log(err)
-			)
+			.catch(err => console.log(err))
 			.finally(() =>
 				this.setState({
 					isLoading: false,
@@ -101,8 +99,14 @@ export default class Home extends Component {
 				{this.state.submit ? (
 					<span>
 						Your shortened URL is:{' '}
-						<a href={this.state.urlOriginal} title={`https://url-shortener-frontend-6tel.onrender.com/url/${this.state.urlAcortada}`} target='_blank' rel='noreferrer'>
-							https://url-shortener-frontend-6tel.onrender.com/{this.state.urlAcortada}
+						<a
+							href={this.state.urlOriginal}
+							title={`https://url-shortener-frontend-6tel.onrender.com/url/${this.state.urlAcortada}`}
+							target='_blank'
+							rel='noreferrer'
+						>
+							https://url-shortener-frontend-6tel.onrender.com/
+							{this.state.urlAcortada}
 						</a>
 					</span>
 				) : null}

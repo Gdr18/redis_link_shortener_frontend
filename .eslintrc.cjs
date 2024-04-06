@@ -4,8 +4,9 @@ module.exports = {
 	extends: [
 		'standard',
 		'plugin:react/recommended',
+		'plugin:react-hooks/recommended',
 		'plugin:react/jsx-runtime',
-		'plugin:react-hooks/recommended'
+		'eslint-config-prettier'
 	],
 	ignorePatterns: ['dist', '.eslintrc.cjs'],
 	parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },

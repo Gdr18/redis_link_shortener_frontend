@@ -8,12 +8,12 @@ import Urls from './pages/urls'
 export default function App() {
 	return (
 		<div className='app'>
-				<Navigation />
-				<Routes>
-					<Route exact path='/' element={<Home />} />
-					<Route path='/urls' element={<Urls />} />
-					<Route element={<NoMatch />} />
-				</Routes>
+			<Navigation />
+			<Routes>
+				<Route exact path='/' element={<Home />} />
+				<Route path='/urls' element={<Urls />} />
+				<Route element={<NoMatch />} />
+			</Routes>
 		</div>
 	)
 }

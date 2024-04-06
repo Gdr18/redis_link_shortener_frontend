@@ -32,10 +32,19 @@ export default class Urls extends Component {
 	urlsItems() {
 		return this.state.urls.map(item => {
 			return (
-				<li key={Object.keys(item)} className='links-wrapper' title={Object.values(item)}>
+				<li
+					key={Object.keys(item)}
+					className='links-wrapper'
+					title={Object.values(item)}
+				>
 					{Object.values(item)}
-					<a href={Object.values(item)} title={`https://url-shortener-frontend-6tel.onrender.com/${Object.keys(item)}`}target='_blank' rel='noreferrer'>
-					https://url-shortener-frontend-6tel.onrender.com/{Object.keys(item)}
+					<a
+						href={Object.values(item)}
+						title={`https://url-shortener-frontend-6tel.onrender.com/${Object.keys(item)}`}
+						target='_blank'
+						rel='noreferrer'
+					>
+						https://url-shortener-frontend-6tel.onrender.com/{Object.keys(item)}
 					</a>
 				</li>
 			)
