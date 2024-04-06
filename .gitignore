@@ -13,9 +13,6 @@ dist-ssr
 *.local
 .env
 .env.production
-.prettierignore
-.prettierrc
-.eslintrc.cjs
 
 # Editor directories and files
 .vscode/*
