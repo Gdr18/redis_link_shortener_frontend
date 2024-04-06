@@ -1,4 +1,3 @@
-import * as React from 'react'
 const CrossIcon = props => (
 	<svg
 		width={16}

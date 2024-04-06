@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { MutatingDots } from 'react-loader-spinner'
 
 export default class Urls extends Component {
@@ -14,11 +14,18 @@ export default class Urls extends Component {
 	componentDidMount() {
 		this.setState({ isLoading: true })
 
+		const timeoutAlert = setTimeout(() => {
+			alert('La primera solicitud tarda en cargar, por favor, ten paciencia 🙏')
+		}, 4000)
+
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/urls`, {
 			method: 'GET'
 		})
 			.then(res => res.json())
-			.then(response => this.setState({ urls: response, isLoading: false }))
+			.then(response => {
+				clearTimeout(timeoutAlert)
+				this.setState({ urls: response, isLoading: false })
+			})
 			.catch(error => console.log('error getting urls', error))
 	}
 

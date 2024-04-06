@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { MutatingDots } from 'react-loader-spinner'
 import CrossIcon from '../icono/cross-icon'
@@ -37,6 +37,10 @@ export default class Home extends Component {
 			isLoading: true
 		})
 
+		const timeoutAlert = setTimeout(() => {
+			alert('La primera solicitud tarda en cargar, por favor, ten paciencia 🙏')
+		}, 4000)
+
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/url`, {
 			method: 'POST',
 			headers: {
@@ -45,19 +49,20 @@ export default class Home extends Component {
 			body: JSON.stringify({ urlOriginal: this.state.urlOriginal })
 		})
 			.then(res => res.json())
-			.then(response =>
+			.then(response => {
+				clearTimeout(timeoutAlert)
 				this.setState({
 					urlAcortada: response
 				})
-			)
+			})
 			.catch(err =>
 				console.log(err)
 			)
 			.finally(() =>
 				this.setState({
-			 		isLoading: false,
-			 		submit: true
-			 	})
+					isLoading: false,
+					submit: true
+				})
 			)
 	}
 
@@ -93,7 +98,6 @@ export default class Home extends Component {
 						wrapperStyle={{ marginTop: '50px' }}
 					/>
 				) : null}
-				
 				{this.state.submit ? (
 					<span>
 						Your shortened URL is:{' '}
