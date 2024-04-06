@@ -3,7 +3,7 @@
   <img src='https://github.com/Gdr18/Url_Shortener_Frontend/assets/118227919/f1ec58ae-b08e-4c36-9b48-e1f791c979a4' alt='redis_link_shortener_gif' width='50%'></img>
 </p>
 <p  align='center'>
-  <span>Url Backend: <a href='https://url-shortener-frontend-6tel.onrender.com/' target="_blank" alt='Enlace backend'>https://url-shortener-frontend-6tel.onrender.com</a></span>
+  <span>Url Frontend: <a href='https://url-shortener-frontend-6tel.onrender.com/' target="_blank" alt='Enlace Frontend'>https://url-shortener-frontend-6tel.onrender.com</a></span>
 </p><br>
 
 Redis Link Shortener es una app cuya función principal es acortar urls dadas por el usuario.
