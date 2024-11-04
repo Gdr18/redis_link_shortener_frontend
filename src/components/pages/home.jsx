@@ -1,7 +1,7 @@
 import { Component } from 'react'
 
 import { MutatingDots } from 'react-loader-spinner'
-import CrossIcon from '../icono/cross-icon'
+import CrossIcon from '../icono/cross_icon'
 
 export default class Home extends Component {
 	constructor() {
@@ -39,7 +39,7 @@ export default class Home extends Component {
 
 		const timeoutAlert = setTimeout(() => {
 			alert('La primera solicitud tarda en cargar, por favor, ten paciencia 🙏')
-		}, 4000)
+		}, 3000)
 
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/url`, {
 			method: 'POST',

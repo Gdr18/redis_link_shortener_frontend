@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 
 import Home from './pages/home'
-import NoMatch from './pages/no-match'
+import NoMatch from './pages/no_match'
 import Navigation from './navigation'
 import Urls from './pages/urls'
 
