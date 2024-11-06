@@ -7,7 +7,9 @@ export default class Urls extends Component {
 
 		this.state = {
 			urls: [],
-			isLoading: false
+			isLoading: false,
+			timeoutAlert: null,
+			abortController: new AbortController()
 		}
 	}
 
@@ -16,17 +18,28 @@ export default class Urls extends Component {
 
 		const timeoutAlert = setTimeout(() => {
 			alert('La primera solicitud tarda en cargar, por favor, ten paciencia 🙏')
-		}, 4000)
+		}, 3000)
+
+		this.setState({ timeoutAlert })
 
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/urls`, {
-			method: 'GET'
+			method: 'GET',
+			signal: this.state.abortController.signal
 		})
 			.then(res => res.json())
 			.then(response => {
-				clearTimeout(timeoutAlert)
+				clearTimeout(this.state.timeoutAlert)
 				this.setState({ urls: response, isLoading: false })
 			})
-			.catch(error => console.log('error getting urls', error))
+			.catch(error => {
+				clearTimeout(this.state.timeoutAlert)
+				console.log('error getting urls', error)
+			})
+	}
+
+	componentWillUnmount() {
+		clearTimeout(this.state.timeoutAlert)
+		this.state.abortController.abort()
 	}
 
 	urlsItems() {
@@ -40,7 +53,9 @@ export default class Urls extends Component {
 					{Object.values(item)}
 					<a
 						href={Object.values(item)}
-						title={`https://url-shortener-frontend-6tel.onrender.com/${Object.keys(item)}`}
+						title={`https://url-shortener-frontend-6tel.onrender.com/${Object.keys(
+							item
+						)}`}
 						target='_blank'
 						rel='noreferrer'
 					>

@@ -11,7 +11,9 @@ export default class Home extends Component {
 			urlOriginal: '',
 			urlAcortada: '',
 			submit: false,
-			isLoading: false
+			isLoading: false,
+			timeoutAlert: null,
+			abortController: new AbortController()
 		}
 
 		this.handleChange = this.handleChange.bind(this)
@@ -39,29 +41,40 @@ export default class Home extends Component {
 
 		const timeoutAlert = setTimeout(() => {
 			alert('La primera solicitud tarda en cargar, por favor, ten paciencia 🙏')
-		}, 3000)
+		}, 2000)
+
+		this.setState({ timeoutAlert })
 
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/url`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ urlOriginal: this.state.urlOriginal })
+			body: JSON.stringify({ urlOriginal: this.state.urlOriginal }),
+			signal: this.state.abortController.signal
 		})
 			.then(res => res.json())
 			.then(response => {
-				clearTimeout(timeoutAlert)
+				clearTimeout(this.state.timeoutAlert)
 				this.setState({
-					urlAcortada: response
-				})
-			})
-			.catch(err => console.log(err))
-			.finally(() =>
-				this.setState({
+					urlAcortada: response,
 					isLoading: false,
 					submit: true
 				})
-			)
+			})
+			.catch(err => {
+				if (err.name === 'AbortError') {
+					console.log('Fetch aborted')
+				} else {
+					console.log(err)
+				}
+				clearTimeout(this.state.timeoutAlert)
+			})
+	}
+
+	componentWillUnmount() {
+		clearTimeout(this.state.timeoutAlert)
+		this.state.abortController.abort()
 	}
 
 	render() {
