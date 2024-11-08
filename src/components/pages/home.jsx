@@ -10,7 +10,7 @@ export default class Home extends Component {
 		this.state = {
 			urlOriginal: '',
 			urlAcortada: '',
-			submit: false,
+			submit: 0,
 			isLoading: false,
 			timeoutAlert: null,
 			abortController: new AbortController()
@@ -59,16 +59,16 @@ export default class Home extends Component {
 				this.setState({
 					urlAcortada: response,
 					isLoading: false,
-					submit: true
+					submit: 1
 				})
 			})
 			.catch(err => {
-				if (err.name === 'AbortError') {
-					console.log('Fetch aborted')
-				} else {
-					console.log(err)
-				}
+				console.log('url post aborted', err)
 				clearTimeout(this.state.timeoutAlert)
+				this.setState({
+					isLoading: false,
+					submit: 2
+				})
 			})
 	}
 
@@ -109,7 +109,7 @@ export default class Home extends Component {
 						wrapperStyle={{ marginTop: '50px' }}
 					/>
 				) : null}
-				{this.state.submit ? (
+				{this.state.submit === 1 ? (
 					<span>
 						Your shortened URL is:{' '}
 						<a
@@ -122,6 +122,8 @@ export default class Home extends Component {
 							{this.state.urlAcortada}
 						</a>
 					</span>
+				) : this.state.submit === 2 ? (
+					<span>Oops! There was an error...</span>
 				) : null}
 			</form>
 		)
