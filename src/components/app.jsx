@@ -12,7 +12,7 @@ export default function App() {
 			<Routes>
 				<Route exact path='/' element={<Home />} />
 				<Route path='/urls' element={<Urls />} />
-				<Route element={<NoMatch />} />
+				<Route path='*' element={<NoMatch />} />
 			</Routes>
 		</div>
 	)

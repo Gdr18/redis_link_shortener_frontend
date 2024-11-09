@@ -7,7 +7,7 @@ export default class Urls extends Component {
 
 		this.state = {
 			urls: [],
-			isLoading: 1,
+			loadingStatus: 1,
 			timeoutAlert: null,
 			abortController: new AbortController()
 		}
@@ -15,7 +15,7 @@ export default class Urls extends Component {
 
 	componentDidMount() {
 		const timeoutAlert = setTimeout(() => {
-			alert('La primera solicitud tarda en cargar, por favor, ten paciencia 🙏')
+			alert('The first request takes to load, please, be patient 🙏')
 		}, 2000)
 
 		this.setState({ timeoutAlert })
@@ -27,12 +27,12 @@ export default class Urls extends Component {
 			.then(res => res.json())
 			.then(response => {
 				clearTimeout(this.state.timeoutAlert)
-				this.setState({ urls: response, isLoading: 0 })
+				this.setState({ urls: response, loadingStatus: 0 })
 			})
 			.catch(error => {
 				clearTimeout(this.state.timeoutAlert)
 				console.log('error getting urls', error)
-				this.setState({ isLoading: 2 })
+				this.setState({ loadingStatus: 2 })
 			})
 	}
 
@@ -69,10 +69,10 @@ export default class Urls extends Component {
 		return (
 			<div
 				className={
-					this.state.isLoading === 1 ? 'centering-spinner' : 'links-container'
+					this.state.loadingStatus === 1 ? 'centering-spinner' : 'links-container'
 				}
 			>
-				{this.state.isLoading === 1 ? (
+				{this.state.loadingStatus === 1 ? (
 					<MutatingDots
 						height='100'
 						width='100'
@@ -86,9 +86,9 @@ export default class Urls extends Component {
 					<ol className='urls-list'>
 						{this.state.urls.length ? (
 							this.urlsItems()
-						) : this.state.isLoading === 0 ? (
+						) : this.state.loadingStatus === 0 ? (
 							<h2>Oops! The list is empty...</h2>
-						) : this.state.isLoading === 2 ? (
+						) : this.state.loadingStatus === 2 ? (
 							<h2>Oops! There was an error...</h2>
 						) : null}
 					</ol>

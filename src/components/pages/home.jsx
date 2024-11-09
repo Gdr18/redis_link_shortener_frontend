@@ -10,8 +10,7 @@ export default class Home extends Component {
 		this.state = {
 			urlOriginal: '',
 			urlAcortada: '',
-			submit: 0,
-			isLoading: false,
+			loadingStatus: 0,
 			timeoutAlert: null,
 			abortController: new AbortController()
 		}
@@ -24,23 +23,17 @@ export default class Home extends Component {
 		this.setState({
 			[event.target.name]: event.target.value
 		})
-
-		if (event.target.value === '') {
-			this.setState({
-				submit: false
-			})
-		}
 	}
 
 	handleSubmit(event) {
 		event.preventDefault()
 
 		this.setState({
-			isLoading: true
+			loadingStatus: 1
 		})
 
 		const timeoutAlert = setTimeout(() => {
-			alert('La primera solicitud tarda en cargar, por favor, ten paciencia 🙏')
+			alert('The first request takes to load, please, be patient 🙏')
 		}, 2000)
 
 		this.setState({ timeoutAlert })
@@ -58,16 +51,14 @@ export default class Home extends Component {
 				clearTimeout(this.state.timeoutAlert)
 				this.setState({
 					urlAcortada: response,
-					isLoading: false,
-					submit: 1
+					loadingStatus: 2
 				})
 			})
 			.catch(err => {
 				console.log('url post aborted', err)
 				clearTimeout(this.state.timeoutAlert)
 				this.setState({
-					isLoading: false,
-					submit: 2
+					loadingStatus: 3
 				})
 			})
 	}
@@ -91,14 +82,14 @@ export default class Home extends Component {
 					<span
 						className='cross-icon'
 						title='Clear'
-						onClick={() => this.setState({ urlOriginal: '', submit: false })}
+						onClick={() => this.setState({ urlOriginal: '', loadingStatus: 0 })}
 					>
 						<CrossIcon />
 					</span>
 				</div>
 				<button>SHORTEN URL</button>
 
-				{this.state.isLoading ? (
+				{this.state.loadingStatus === 1 ? (
 					<MutatingDots
 						height='100'
 						width='100'
@@ -108,8 +99,7 @@ export default class Home extends Component {
 						ariaLabel='mutating-dots-loading'
 						wrapperStyle={{ marginTop: '50px' }}
 					/>
-				) : null}
-				{this.state.submit === 1 ? (
+				) : this.state.loadingStatus === 2 ? (
 					<span>
 						Your shortened URL is:{' '}
 						<a
@@ -122,7 +112,7 @@ export default class Home extends Component {
 							{this.state.urlAcortada}
 						</a>
 					</span>
-				) : this.state.submit === 2 ? (
+				) : this.state.loadingStatus === 3 ? (
 					<span>Oops! There was an error...</span>
 				) : null}
 			</form>
